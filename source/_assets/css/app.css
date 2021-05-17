@@ -2,8 +2,33 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import "./highlight.js/atom-one-dark";
+@import "./prism.css";
 
 pre {
     @apply my-6 p-4 rounded overflow-x-auto bg-gray-800 text-gray-200
+}
+
+.post {
+    & pre {
+        @apply my-6 p-4 rounded overflow-x-auto
+    }
+
+    & p {
+        & {
+            @apply my-5
+        }
+
+        & > code {
+            @apply text-indigo-500
+        }
+
+        & > code:before,
+        & > code:after {
+            content: "`";
+        }
+    }
+
+    & a {
+        @apply text-blue-500 font-medium
+    }
 }
