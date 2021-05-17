@@ -6,8 +6,8 @@ mix.setPublicPath('source/assets/build')
 
 mix
     .jigsaw()
-    .js('source/_assets/js/main.js', 'js')
-    .postCss('source/_assets/css/main.css', 'css', [
+    .js('source/_assets/js/app.js', 'js')
+    .postCss('source/_assets/css/app.css', 'css', [
         require('postcss-import'),
         require('tailwindcss'),
         require('postcss-nesting')
