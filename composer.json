@@ -1,6 +1,10 @@
 {
+    "name": "claudiodekker/dekker.io",
+    "description": "Personal site of Claudio Dekker",
     "require": {
-        "tightenco/jigsaw": "^v1.3.37",
-        "scrivo/highlight.php": "v9.18.1.6"
+        "tightenco/jigsaw": "^v1.3.37"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
     }
 }

@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       colors: {
         cyan: colors.cyan,
+        'blue-gray': colors.blueGray,
         'light-blue': colors.lightBlue,
         lime: colors.lime,
         rose: colors.rose,
@@ -18,7 +19,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+    },
   },
   plugins: [],
 };

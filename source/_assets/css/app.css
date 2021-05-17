@@ -5,12 +5,22 @@
 @import "./prism.css";
 
 pre {
-    @apply my-6 p-4 rounded overflow-x-auto bg-gray-800 text-gray-200
+    @apply my-6 p-4 rounded overflow-x-auto bg-gray-800 text-gray-200 text-sm md:text-base
 }
 
 .post {
     & pre {
         @apply my-6 p-4 rounded overflow-x-auto
+    }
+
+    & ul {
+        & {
+            @apply list-disc ml-4
+        }
+
+        & li {
+            @apply ml-4 mt-0.5
+        }
     }
 
     & p {
@@ -29,6 +39,13 @@ pre {
     }
 
     & a {
-        @apply text-blue-500 font-medium
+        @apply text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300
+    }
+
+    & b,
+    & strong {
+        & a {
+            @apply font-semibold
+        }
     }
 }
