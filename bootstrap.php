@@ -1,5 +1,6 @@
 <?php
 
+use Highlight\Highlighter;
 use TightenCo\Jigsaw\Jigsaw;
 
 /** @var $container \Illuminate\Container\Container */
@@ -15,3 +16,6 @@ use TightenCo\Jigsaw\Jigsaw;
  *     // Your code here
  * });
  */
+$container['markdownParser']->code_block_content_func = function ($code, $language) {
+    return (new Highlighter())->highlight($language ?? 'plaintext', $code)->value;
+};

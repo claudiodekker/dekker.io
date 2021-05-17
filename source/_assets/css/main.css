@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@import "./highlight.js/atom-one-dark";
+
+pre {
+    @apply my-6 p-4 rounded overflow-x-auto bg-gray-800 text-gray-200
+}

@@ -1,5 +1,6 @@
 {
     "require": {
-        "tightenco/jigsaw": "^1.3"
+        "tightenco/jigsaw": "^v1.3.37",
+        "scrivo/highlight.php": "v9.18.1.6"
     }
 }
