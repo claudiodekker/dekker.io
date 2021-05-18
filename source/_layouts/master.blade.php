@@ -6,7 +6,6 @@
         <link rel="canonical" href="{{ $page->getUrl() }}">
         <title>{{ $page->basename }} - {{ $page->title }}</title>
         <link rel="stylesheet" href="{{ mix('css/app.css', 'assets/build') }}">
-        <script defer src="{{ mix('js/app.js', 'assets/build') }}"></script>
     </head>
     <body class="text-blue-gray-600 font-sans antialiased">
         <div class="flex flex-col max-w-4xl mx-auto px-6 py-10 min-h-screen">
