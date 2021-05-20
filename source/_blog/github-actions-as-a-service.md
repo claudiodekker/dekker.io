@@ -4,6 +4,7 @@ section: content
 title: GitHub Actions as a Service
 date: 2021-05-20
 keywords: github,actions,pr,fixer,automatic,custom
+image: /assets/images/blog/github-actions-as-a-service/social.jpg
 ---
 
 It's no secret that over at [Laravel](https://laravel.com) we host our code on GitHub.

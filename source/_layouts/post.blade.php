@@ -1,5 +1,9 @@
 @extends('_layouts.master')
 
+@php
+  $page->description = $page->description ?: str_replace(["\n", "\r"], " ",$page->getExcerpt());
+@endphp
+
 @section('body')
     <div>
         <span class="text-xl text-blue-gray-500 font-semibold">{{ $page->getDate()->format('F j, Y') }}</span>

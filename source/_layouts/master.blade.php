@@ -4,8 +4,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="canonical" href="{{ $page->getUrl() }}">
-        <title>{{ $page->basename }} - {{ $page->title }}</title>
         <link rel="stylesheet" href="{{ mix('css/app.css', 'assets/build') }}">
+        <title>{{ $page->basename . ' - ' . $page->title }}</title>
+        @if($page->description)<meta name="description" content="{{ $page->description }}">@endif
+        <meta name="author" content="{{ $page->author }}" />
+        {{-- All Common --}}
+        <meta property="og:type" content="{{ $page->type }}" />
+        @if ($page->image)<meta property="og:image" content="{{ $page->domain . $page->image }}" />@endif
+        {{-- Facebook --}}
+        <meta property="og:url" content="{{ $page->getUrl() }}" />
+        <meta property="og:title" content="{{ $page->basename . ' - ' . $page->title }}" />
+        @if($page->description)<meta property="og:description" content="{{ $page->description }}" />@endif
+        {{--    <meta name="fb:app_id" content="{{  config('social.fb_app_id') }}">--}}
+        {{-- Twitter Summary Card --}}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@claudiodekker">
+        <meta name="twitter:creator" content="{{ $page->author }}">
+        <meta name="twitter:title" content="{{ $page->basename . ' - ' . $page->title }}">
+        @if($page->description)<meta name="twitter:description" content="{{ $page->description }}">@endif
+        @if ($page->image)<meta name="twitter:image" content="{{ $page->domain . $page->image }}" />@endif
     </head>
     <body class="text-blue-gray-600 font-sans antialiased">
         <div class="flex flex-col max-w-4xl mx-auto px-6 py-10 min-h-screen">

@@ -2,12 +2,16 @@
 
 return [
     'production' => false,
+    'domain' => 'http://dekker.test',
     'basename' => 'Claudio Dekker',
+    'author' => '@claudiodekker',
+    'type' => 'website',
     'title' => 'Software Developer at Laravel & Maintainer at InertiaJS',
     'collections' => [
         'blog' => [
+            'type' => 'article',
             'path' => 'blog/{filename}',
-            'author' => 'Claudio Dekker',
+            'author' => '@claudiodekker',
             'categories' => ['articles'],
             'sort' => ['-date'],
             'filter' => function ($item) {
