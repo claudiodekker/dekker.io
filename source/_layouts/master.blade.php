@@ -23,6 +23,9 @@
         <meta name="twitter:title" content="{{ $page->basename . ' - ' . $page->title }}">
         @if($page->description)<meta name="twitter:description" content="{{ $page->description }}">@endif
         @if ($page->image)<meta name="twitter:image" content="{{ $page->domain . $page->image }}" />@endif
+        <!-- Fathom - beautiful, simple website analytics -->
+        <script src="https://cdn.usefathom.com/script.js" data-site="CULPJASS" defer></script>
+        <!-- / Fathom -->
     </head>
     <body class="text-blue-gray-600 font-sans antialiased">
         <div class="flex flex-col max-w-4xl mx-auto px-6 py-10 min-h-screen">
