@@ -37,9 +37,9 @@
             </header>
             @yield('body')
             <footer class="text-center text-xs opacity-50 mt-12">
-                This site was built using <a href="http://jigsaw.tighten.co" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">Jigsaw</a>
+                This site was built using <a href="http://jigsaw.tighten.co" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">Jigsaw</a>,
                 <a href="https://tailwindcss.com" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">TailwindCSS</a>,
-                <a href="https://prismjs.com" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">Prism</a>,
+                <a href="https://torchlight.dev/" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">Torchlight</a>,
                 and is hosted on <a href="https://netlify.com" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">Netlify</a>.
                 Source code available on <a href="https://github.com/claudiodekker/dekker.io" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">GitHub</a>.
             </footer>

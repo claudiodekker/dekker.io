@@ -2,7 +2,8 @@
     "name": "claudiodekker/dekker.io",
     "description": "Personal site of Claudio Dekker",
     "require": {
-        "tightenco/jigsaw": "^v1.3.37"
+        "tightenco/jigsaw": "^v1.3.37",
+        "torchlight/torchlight-jigsaw": "^0.1.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"

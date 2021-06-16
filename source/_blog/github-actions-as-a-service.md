@@ -362,92 +362,92 @@ Our workflow is now complete.
 Another workflow we have is almost identical, but instead fixes Javascript and Vue code style inconsistencies.
 To show how easy it is to create a new fixer, we'll first copy the entire workflow from earlier, and swap out the relevant parts:
 
-```diff
--name: php-cs-fixer
-+name: js-cs-fixer
+```yaml
+name: php-cs-fixer # [tl! .diff-remove]
+name: js-cs-fixer # [tl! .diff-add]
 
- on: [push, pull_request]
+on: [push, pull_request]
 
- env:
-   PR_NUMBER: "${{ github.event.number }}"
-   SOURCE_BRANCH: "$GITHUB_HEAD_REF"
-   FIXER_BRANCH: "auto-fixed/$GITHUB_HEAD_REF"
--  TITLE: "Apply fixes from PHP-CS-Fixer"
--  DESCRIPTION: "This merge request applies PHP code style fixes from an analysis carried out through GitHub Actions."
-+  TITLE: "Apply fixes from JS-CS-Fixer"
-+  DESCRIPTION: "This merge request applies JS code style fixes from an analysis carried out through GitHub Actions."
+env:
+  PR_NUMBER: "${{ github.event.number }}"
+  SOURCE_BRANCH: "$GITHUB_HEAD_REF"
+  FIXER_BRANCH: "auto-fixed/$GITHUB_HEAD_REF"
+  TITLE: "Apply fixes from PHP-CS-Fixer" # [tl! .diff-remove]
+  DESCRIPTION: "This merge request applies PHP code style fixes from an analysis carried out through GitHub Actions." # [tl! .diff-remove]
+  TITLE: "Apply fixes from JS-CS-Fixer" # [tl! .diff-add]
+  DESCRIPTION: "This merge request applies JS code style fixes from an analysis carried out through GitHub Actions." # [tl! .diff-add]
 
- jobs:
--  php-cs-fixer:
-+  js-cs-fixer:
-     if: github.event_name == 'pull_request' && ! startsWith(github.ref, 'refs/heads/auto-fixed/')
-     runs-on: ubuntu-20.04
+jobs:
+  php-cs-fixer: # [tl! .diff-remove]
+  js-cs-fixer: # [tl! .diff-add]
+    if: github.event_name == 'pull_request' && ! startsWith(github.ref, 'refs/heads/auto-fixed/')
+    runs-on: ubuntu-20.04
 
--    name: Run PHP CS Fixer
-+    name: Run JS CS Fixer
+    name: Run PHP CS Fixer # [tl! .diff-remove]
+    name: Run JS CS Fixer # [tl! .diff-add]
 
-     steps:
-       - name: Checkout Code
-         uses: actions/checkout@v2
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
--      - name: Setup PHP
--        uses: shivammathur/setup-php@2.7.0
--        with:
--          php-version: 7.4
--          extensions: json, dom, curl, libxml, mbstring
--          coverage: none
--
--      - name: Install PHP-CS-Fixer
--        run: |
--          curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.18.6/php-cs-fixer.phar -o .github/build/php-cs-fixer
--          chmod a+x .github/build/php-cs-fixer
-+      - name: Set up Node & NPM
-+        uses: actions/setup-node@v2
-+        with:
-+          node-version: '14.x'
-+
-+      - name: Get yarn cache directory path
-+        id: yarn-cache-dir-path
-+        run: echo "::set-output name=dir::$(yarn cache dir)"
-+ 
-+      - uses: actions/cache@v2
-+        id: yarn-cache
-+        with:
-+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-+          restore-keys: ${{ runner.os }}-yarn-
-+
-+      - name: Install yarn project dependencies
-+        run: yarn
+      - name: Setup PHP # [tl! .diff-remove]
+        uses: shivammathur/setup-php@2.7.0 # [tl! .diff-remove]
+        with: # [tl! .diff-remove]
+          php-version: 7.4 # [tl! .diff-remove]
+          extensions: json, dom, curl, libxml, mbstring # [tl! .diff-remove]
+          coverage: none # [tl! .diff-remove]
+ # [tl! .diff-remove]
+      - name: Install PHP-CS-Fixer # [tl! .diff-remove]
+        run: | # [tl! .diff-remove]
+          curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.18.6/php-cs-fixer.phar -o .github/build/php-cs-fixer # [tl! .diff-remove]
+          chmod a+x .github/build/php-cs-fixer # [tl! .diff-remove]
+      - name: Set up Node & NPM # [tl! .diff-add]
+        uses: actions/setup-node@v2 # [tl! .diff-add]
+        with: # [tl! .diff-add]
+          node-version: '14.x' # [tl! .diff-add]
+ # [tl! .diff-add]
+      - name: Get yarn cache directory path # [tl! .diff-add]
+        id: yarn-cache-dir-path # [tl! .diff-add]
+        run: echo "::set-output name=dir::$(yarn cache dir)" # [tl! .diff-add]
+ # [tl! .diff-add]
+      - uses: actions/cache@v2 # [tl! .diff-add]
+        id: yarn-cache # [tl! .diff-add]
+        with: # [tl! .diff-add]
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }} # [tl! .diff-add]
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }} # [tl! .diff-add]
+          restore-keys: ${{ runner.os }}-yarn- # [tl! .diff-add]
+ # [tl! .diff-add]
+      - name: Install yarn project dependencies # [tl! .diff-add]
+        run: yarn # [tl! .diff-add]
 
-       - name: Prepare Git User
-         run: |
-           git config --global user.name "github-actions[bot]"
-           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-           git checkout -B "${{ env.FIXER_BRANCH }}"
+      - name: Prepare Git User
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "${{ env.FIXER_BRANCH }}"
 
-       - name: Apply auto-fixers
-+        run: yarn fix-code-style
--        run: php .github/build/php-cs-fixer fix
+      - name: Apply auto-fixers
+        run: php .github/build/php-cs-fixer fix # [tl! .diff-remove]
+        run: yarn fix-code-style # [tl! .diff-add]
 
-       - name: Create Fixer PR
-         run: |
-           if [[ -z $(git status --porcelain) ]]; then
-             echo "Nothing to fix.. Exiting."
-             exit 0
-           fi
-           OPEN_PRS=`curl --silent -H "Accept: application/vnd.github.v3+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open"`
-           OPEN_FIXER_PRS=`echo ${OPEN_PRS} | grep -o "\"ref\": \"${{ env.FIXER_BRANCH }}\"" | wc -l`
-           git commit -am "${{ env.TITLE }}"
-           git push origin "${{ env.FIXER_BRANCH }}" --force
-           if [ ${OPEN_FIXER_PRS} -eq "0" ]; then
-             curl -X POST \
-               -H "Accept: application/vnd.github.v3+json" \
-               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-               "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls" \
-               -d "{ \"head\":\"${{ env.FIXER_BRANCH }}\", \"base\":\"${{ env.SOURCE_BRANCH }}\", \"title\":\"${{ env.TITLE }}\", \"body\":\"${{ env.DESCRIPTION }}\n\nTriggered by #${{ env.PR_NUMBER }}\" }"
-           fi
-           exit 1
+      - name: Create Fixer PR
+        run: |
+          if [[ -z $(git status --porcelain) ]]; then
+            echo "Nothing to fix.. Exiting."
+            exit 0
+          fi
+          OPEN_PRS=`curl --silent -H "Accept: application/vnd.github.v3+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls?state=open"`
+          OPEN_FIXER_PRS=`echo ${OPEN_PRS} | grep -o "\"ref\": \"${{ env.FIXER_BRANCH }}\"" | wc -l`
+          git commit -am "${{ env.TITLE }}"
+          git push origin "${{ env.FIXER_BRANCH }}" --force
+          if [ ${OPEN_FIXER_PRS} -eq "0" ]; then
+            curl -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls" \
+              -d "{ \"head\":\"${{ env.FIXER_BRANCH }}\", \"base\":\"${{ env.SOURCE_BRANCH }}\", \"title\":\"${{ env.TITLE }}\", \"body\":\"${{ env.DESCRIPTION }}\n\nTriggered by #${{ env.PR_NUMBER }}\" }"
+          fi
+          exit 1
 ```
 
 In this case, instead of installing PHP like before, we install Node.js, as well as our project's dependencies (which in our case includes [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/))

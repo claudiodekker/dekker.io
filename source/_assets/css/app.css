@@ -2,12 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import "./prism.css";
-
-pre {
-    @apply my-6 p-4 rounded overflow-x-auto bg-gray-800 text-gray-200 text-sm md:text-base
-}
-
 .post {
     & p {
         @apply my-5
@@ -15,14 +9,34 @@ pre {
 
     & pre {
         & {
-            @apply my-6 p-4 rounded overflow-x-auto
+            @apply my-6 rounded block overflow-x-auto text-sm md:text-base
         }
 
-        & > code {
-            @apply inline-block
+        & > code.torchlight {
+            & {
+                @apply block py-4 min-w-max
+            }
+
+            & .line {
+                & {
+                    @apply px-4
+                }
+
+                & .line-number,
+                & .summary-caret {
+                    @apply mr-4
+                }
+
+                &.diff-add {
+                    @apply text-emerald-200 text-opacity-75 bg-emerald-700 bg-opacity-50
+                }
+                &.diff-remove {
+                    @apply text-gray-400 text-opacity-75 bg-rose-400 bg-opacity-25
+                }
+            }
+
         }
     }
-
 
     & blockquote {
         @apply border-l-4 border-blue-gray-300 bg-blue-gray-200 px-4 py-2 rounded

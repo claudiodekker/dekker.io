@@ -12,7 +12,6 @@
         "postcss": "^8.1",
         "postcss-import": "^14.0.2",
         "postcss-nesting": "^8.0.1",
-        "tailwindcss": "^2.0.2",
-        "prismjs": "^1.23.0"
+        "tailwindcss": "^2.0.2"
     }
 }
