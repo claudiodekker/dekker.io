@@ -1,20 +1,19 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: [
-    'source/**/*.blade.php',
-    'source/**/*.md',
+  content: require('fast-glob').sync([
     'source/**/*.html',
-  ],
+    'source/**/*.md',
+    'source/**/*.js',
+    'source/**/*.php',
+    'source/**/*.vue',
+  ]),
   theme: {
     extend: {
       colors: {
         cyan: colors.cyan,
-        'blue-gray': colors.blueGray,
-        'light-blue': colors.lightBlue,
-        lime: colors.lime,
-        rose: colors.rose,
-        emerald: colors.emerald,
+        'slate': colors.slate,
+        rose: colors.rose
       }
     },
   },

@@ -8,7 +8,7 @@ permalink: 404.html
 <div class="flex flex-grow items-center justify-center">
     <div>
         <h2 class="text-xl sm:text-4xl font-bold mb-2">Not the droids you're looking for..</h2>
-        <p class="text-blue-gray-700 dark:text-gray-600 mb-8">
+        <p class="text-slate-700 dark:text-gray-600 mb-8">
             <span class="rounded mr-1 px-2 py-1 bg-rose-600 text-white">404</span>
             The page you tried to reach doesn't exist.
         </p>

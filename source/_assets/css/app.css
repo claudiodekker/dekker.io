@@ -39,11 +39,11 @@
     }
 
     & blockquote {
-        @apply border-l-4 border-blue-gray-300 bg-blue-gray-200 px-4 py-2 rounded
+        @apply border-l-4 border-slate-300 bg-slate-200 px-4 py-2 rounded
     }
 
     & img {
-        @apply rounded-md shadow-lg border border-blue-gray-200;
+        @apply rounded-md shadow-lg border border-slate-200;
     }
 
     & ol {
@@ -73,19 +73,19 @@
     }
 
     & h1 {
-        @apply mt-12 mb-4 text-4xl font-bold text-blue-gray-700 pb-2 border-b border-gray-300
+        @apply mt-12 mb-4 text-4xl font-bold text-slate-700 pb-2 border-b border-gray-300
     }
 
     & h2 {
-        @apply mt-6 mb-4 text-3xl font-bold text-blue-gray-600
+        @apply mt-6 mb-4 text-3xl font-bold text-slate-600
     }
 
     & h3 {
-      @apply my-4 text-2xl font-semibold text-blue-gray-500
+      @apply my-4 text-2xl font-semibold text-slate-500
     }
 
     & h4 {
-      @apply my-4 text-xl font-medium text-blue-gray-700
+      @apply my-4 text-xl font-medium text-slate-700
     }
 
     & h1,

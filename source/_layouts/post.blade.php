@@ -1,12 +1,7 @@
 @extends('_layouts.master')
-
-@php
-  $page->description = $page->description ?: str_replace(["\n", "\r"], " ",$page->getExcerpt());
-@endphp
-
 @section('body')
     <div>
-        <span class="text-xl text-blue-gray-500 font-semibold">{{ $page->getDate()->format('F j, Y') }}</span>
+        <span class="text-xl text-slate-500 font-semibold">{{ $page->getDate()->format('F j, Y') }}</span>
         <h1 class="block text-5xl font-extrabold text-gray-900 tracking-tight mb-4">{{ $page->title }}</h1>
 
         <div class="mt-6 mb-16 post">
@@ -18,7 +13,7 @@
             $previous = $page->getPrevious();
         @endphp
         @if ($next || $previous)
-            <nav class="flex justify-between text-sm md:text-base border-t border-blue-gray-200 pt-3">
+            <nav class="flex justify-between text-sm md:text-base border-t border-slate-200 pt-3">
                 <div>
                     @if ($next)
                         <a href="{{ $next->getUrl() }}" title="Older Post: {{ $next->title }}" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">

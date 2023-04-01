@@ -17,4 +17,5 @@ use Torchlight\Jigsaw\TorchlightExtension;
  *     // Your code here
  * });
  */
+
 TorchlightExtension::make($container, $events)->boot();
