@@ -1,5 +1,6 @@
 <style>
     .prose > * + * { margin-top: 1.35em; }
+    .prose p, .prose li { text-wrap: pretty; }
     .prose h1, .prose h2, .prose h3, .prose h4 { margin-top: 2.2em; line-height: 1.3; font-weight: 600; letter-spacing: -.015em; color: var(--color-ink); }
     .prose h1 { font-size: 26px; }
     .prose h2 { font-size: 22px; }
