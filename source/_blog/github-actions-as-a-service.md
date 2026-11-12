@@ -29,7 +29,7 @@ Ideally, it would do all of the following, without user interaction, and without
 
 And about ~30 `WIP` commits later, here's what we ended up with:
 
-![GIF image showcasing the Fixer PR process](/assets/images/blog/github-actions-as-a-service/process.gif)
+![GIF image showcasing the Fixer PR process](/assets/images/blog/github-actions-as-a-service/process.gif){width=960 height=960}
 
 # The Action Itself
 

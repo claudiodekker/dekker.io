@@ -1,20 +1,12 @@
 {
     "private": true,
     "scripts": {
-        "dev": "mix",
-        "watch": "mix watch",
-        "prod": "mix --production"
+        "css": "tailwindcss -i source/_assets/css/app.css -o source/_assets/build/app.css --minify",
+        "dev": "npm run css && vendor/bin/jigsaw build",
+        "prod": "npm run css && vendor/bin/jigsaw build production"
     },
     "devDependencies": {
-        "autoprefixer": "^10.4.14",
-        "browser-sync": "^2.29.1",
-        "browser-sync-webpack-plugin": "^2.3.0",
-        "fast-glob": "^3.2.12",
-        "laravel-mix": "^6.0.39",
-        "laravel-mix-jigsaw": "^2.0.0",
-        "postcss": "^8.5.23",
-        "postcss-import": "^14.0.2",
-        "postcss-nesting": "^11.2.2",
-        "tailwindcss": "^3.3.1"
+        "@tailwindcss/cli": "^4.3.5",
+        "tailwindcss": "^4.3.5"
     }
 }

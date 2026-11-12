@@ -1,14 +1,41 @@
 <?php
 
+use App\TorchlightCodeBlocks;
 use Illuminate\Support\Str;
+use League\CommonMark\Extension\Attributes\AttributesExtension;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
+use League\CommonMark\Extension\DefaultAttributes\DefaultAttributesExtension;
+use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
+use League\CommonMark\Extension\Table\TableExtension;
+use Torchlight\Engine\CommonMark\Extension as TorchlightExtension;
+use Torchlight\Engine\Theme\Theme;
 
 return [
     'production' => false,
     'domain' => 'http://dekker.test',
     'siteName' => 'Claudio Dekker',
     'siteAuthor' => 'Claudio Dekker',
-    'siteDescription' => 'Software Developer & Maintainer at InertiaJS',
+    'siteDescription' => 'Software developer from Amsterdam.',
     'type' => 'website',
+    'image' => '/assets/images/social.jpg',
+    'commonmark' => [
+        'config' => [
+            'default_attributes' => [
+                'strict_callables' => true,
+                Image::class => ['loading' => 'lazy', 'decoding' => 'async'],
+            ],
+        ],
+        'extensions' => [
+            new AttributesExtension,
+            new DefaultAttributesExtension,
+            new StrikethroughExtension,
+            new TableExtension,
+            new TorchlightCodeBlocks(new TorchlightExtension([
+                'dark' => Theme::fromFile(__DIR__.'/themes/dark.json'),
+                'light' => Theme::fromFile(__DIR__.'/themes/light.json'),
+            ])),
+        ],
+    ],
     'collections' => [
         'blog' => [
             'type' => 'article',
@@ -22,6 +49,7 @@ return [
         ]
     ],
     'getDate' => fn ($page) => DateTime::createFromFormat('U', $page->date),
+    'styles' => fn () => file_get_contents(__DIR__.'/source/_assets/build/app.css'),
     'getDescription' => function ($page, $maxLength = 150) {
         if ($page->description) {
             return $page->description;
