@@ -88,7 +88,7 @@
     .mind-trick h1 { transition: filter .6s, opacity .6s, transform .6s cubic-bezier(.3, 0, .2, 1); }
     .mind-trick:has(a:hover, a:focus-visible) h1 { filter: blur(5px); opacity: .45; transform: translateX(14px) skewX(-6deg); }
 
-    .letter p { animation: var(--animate-rise); }
+    .letter p { animation: var(--animate-rise); text-wrap: pretty; }
     .letter p + p { margin-top: 1.45em; }
     .letter p:first-child { color: var(--color-ink); }
     .letter p:nth-child(2) { animation-delay: .14s; }
