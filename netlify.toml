@@ -1,5 +1,5 @@
 [build]
-  command = "npm run prod"
+  command = "composer install --no-dev --no-interaction && npm run prod"
   publish = "build_production"
 
 [build.environment]
