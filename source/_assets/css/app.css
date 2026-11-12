@@ -1,126 +1,134 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss";
 
-.post {
-    & p {
-        @apply my-5
+@theme static {
+    --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
+    --font-mono: 'Geist Mono', 'Geist Mono Fallback', ui-monospace, monospace;
+
+    --color-night: #070c1a;
+    --color-ink: #f1f5fd;
+    --color-soft: #a9b6d0;
+    --color-dim: #7686a4;
+    --color-accent: #8fb4ff;
+    --color-line: rgb(143 180 255 / .12);
+
+    --animate-rise: rise 1.5s cubic-bezier(.16, 1, .3, 1) both;
+
+    @keyframes rise {
+        from { opacity: 0; transform: translateY(26px); }
+    }
+}
+
+@layer base {
+    @font-face { font-family: 'Geist'; font-weight: 400; font-display: swap; src: url('/assets/fonts/geist-400.woff2') format('woff2'); }
+    @font-face { font-family: 'Geist'; font-weight: 600; font-display: swap; src: url('/assets/fonts/geist-600.woff2') format('woff2'); }
+    @font-face { font-family: 'Geist Mono'; font-weight: 400; font-display: swap; src: url('/assets/fonts/geist-mono-400.woff2') format('woff2'); }
+
+    /* System fonts resized to Geist's proportions, so text keeps its line breaks when Geist swaps in. */
+    @font-face { font-family: 'Geist Mono Fallback'; src: local('Menlo'), local('Courier New'), local('Liberation Mono'); size-adjust: 99.65%; }
+    @font-face { font-family: 'Geist Fallback'; src: local('Arial'), local('Liberation Sans'), local('Arimo'); size-adjust: 102.5%; ascent-override: 98.05%; descent-override: 28.78%; line-gap-override: 0%; }
+
+    :root {
+        --glow-cool: rgb(74 113 255 / .2);
+        --glow-warm: rgb(255 170 90 / .07);
+        --grid: rgb(143 180 255 / .05);
+        --selection: rgb(143 180 255 / .28);
+        --code-surface: #0b1224;
+        --code-inline: #b9cdfa;
+        --code-inline-surface: rgb(143 180 255 / .07);
     }
 
-    & pre {
-        & {
-            @apply my-6 rounded block overflow-x-auto text-sm md:text-base
-        }
-
-        & > code.torchlight {
-            & {
-                @apply block py-4 min-w-max
-            }
-
-            & .line {
-                & {
-                    @apply px-4
-                }
-
-                & .line-number,
-                & .summary-caret {
-                    @apply mr-4
-                }
-
-                &.diff-add {
-                    @apply text-emerald-200 text-opacity-75 bg-emerald-700 bg-opacity-50
-                }
-                &.diff-remove {
-                    @apply text-gray-400 text-opacity-75 bg-rose-400 bg-opacity-25
-                }
-            }
-
-        }
-    }
-
-    & blockquote {
-        @apply border-l-4 border-slate-300 bg-slate-200 px-4 py-2 rounded
-    }
-
-    & img {
-        @apply rounded-md shadow-lg border border-slate-200;
-    }
-
-    & ol {
-        @apply list-decimal
-    }
-
-    & ul {
-        @apply list-disc
-    }
-
-    & ol,
-    & ul {
-        & {
-            @apply ml-4
-        }
-
-        & li {
-            @apply ml-4 mt-0.5
+    @media (prefers-color-scheme: light) {
+        :root {
+            --color-night: #f5f7fc;
+            --color-ink: #0c1326;
+            --color-soft: #434d66;
+            --color-dim: #66718a;
+            --color-accent: #2c5bd8;
+            --color-line: rgb(24 44 96 / .13);
+            --glow-cool: rgb(90 130 255 / .17);
+            --glow-warm: rgb(255 160 80 / .13);
+            --grid: rgb(40 70 150 / .07);
+            --selection: rgb(60 110 255 / .2);
+            --code-surface: #eef1f8;
+            --code-inline: #2a4aa8;
+            --code-inline-surface: rgb(40 80 200 / .07);
         }
     }
 
-    & h1,
-    & h2,
-    & h3,
-    & h4 {
-        @apply block tracking-tight
+    html { background: var(--color-night); color-scheme: dark light; }
+    body { text-rendering: optimizeLegibility; }
+    a { transition: color .2s; }
+    a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 3px; }
+    ::selection { background: var(--selection); color: var(--color-ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+}
+
+@layer components {
+    .backdrop::before, .backdrop::after { content: ''; position: absolute; inset: 0 0 auto; height: max(100vh, 1000px); pointer-events: none; }
+    .backdrop::before {
+        background:
+            radial-gradient(900px 520px at 78% 8%, var(--glow-cool), transparent 65%),
+            radial-gradient(700px 500px at 5% 75%, var(--glow-warm), transparent 65%);
+    }
+    .backdrop::after {
+        opacity: .5;
+        background-image:
+            linear-gradient(var(--grid) 1px, transparent 1px),
+            linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: radial-gradient(ellipse 70% 60% at 60% 30%, #000, transparent);
+        transform: perspective(900px) rotateX(48deg) scale(1.6);
+        transform-origin: 50% 0;
+    }
+    .backdrop > * { position: relative; z-index: 1; }
+
+    .mind-trick h1 { transition: filter .6s, opacity .6s, transform .6s cubic-bezier(.3, 0, .2, 1); }
+    .mind-trick:has(a:hover, a:focus-visible) h1 { filter: blur(5px); opacity: .45; transform: translateX(14px) skewX(-6deg); }
+
+    .letter p { animation: var(--animate-rise); }
+    .letter p + p { margin-top: 1.45em; }
+    .letter p:first-child { color: var(--color-ink); }
+    .letter p:nth-child(2) { animation-delay: .14s; }
+    .letter p:nth-child(3) { animation-delay: .28s; }
+    .letter p:nth-child(n + 4) { animation-delay: .42s; }
+    .letter p a { color: var(--color-accent); }
+    .letter p a:hover { color: var(--color-ink); }
+
+    .signature { transform: rotate(-2deg) skewX(7deg); transform-origin: left bottom; }
+    .signature path { fill: none; stroke: currentColor; stroke-width: 1.33; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; animation: sign 1.5s linear .25s both; }
+    .signature path + path { animation: dot .09s linear 1.9s both; }
+
+    @keyframes dot {
+        from { stroke-dashoffset: 1; opacity: 0; }
     }
 
-    & h1 {
-        @apply mt-12 mb-4 text-4xl font-bold text-slate-700 pb-2 border-b border-gray-300
-    }
-
-    & h2 {
-        @apply mt-6 mb-4 text-3xl font-bold text-slate-600
-    }
-
-    & h3 {
-      @apply my-4 text-2xl font-semibold text-slate-500
-    }
-
-    & h4 {
-      @apply my-4 text-xl font-medium text-slate-700
-    }
-
-    & h1,
-    & h2,
-    & h3,
-    & h4,
-    & h5,
-    & p,
-    & a,
-    & ol > li,
-    & ul > li,
-    & blockquote {
-        &,
-        & em,
-        & b,
-        & strong {
-            & > code {
-                @apply text-indigo-500
-            }
-
-            & > code:before,
-            & > code:after {
-                content: "`";
-            }
-        }
-    }
-
-    & a {
-        @apply text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300
-    }
-
-    & b,
-    & strong {
-        & a {
-            @apply font-semibold
-        }
+    @keyframes sign {
+    0% { stroke-dashoffset: 1; opacity: 0; }
+    4.57% { stroke-dashoffset: 0.971; opacity: 1; }
+    12.81% { stroke-dashoffset: 0.883; }
+    19.58% { stroke-dashoffset: 0.83; }
+    28.64% { stroke-dashoffset: 0.731; }
+    31.43% { stroke-dashoffset: 0.71; }
+    36.12% { stroke-dashoffset: 0.654; }
+    41.97% { stroke-dashoffset: 0.608; }
+    49.94% { stroke-dashoffset: 0.56; }
+    52.51% { stroke-dashoffset: 0.51; }
+    55.86% { stroke-dashoffset: 0.482; }
+    57.86% { stroke-dashoffset: 0.455; }
+    62.16% { stroke-dashoffset: 0.411; }
+    69.18% { stroke-dashoffset: 0.362; }
+    71.36% { stroke-dashoffset: 0.335; }
+    75.86% { stroke-dashoffset: 0.307; }
+    79.57% { stroke-dashoffset: 0.251; }
+    80.73% { stroke-dashoffset: 0.201; }
+    81.34% { stroke-dashoffset: 0.186; }
+    85.83% { stroke-dashoffset: 0.136; }
+    92.98% { stroke-dashoffset: 0.087; }
+    94.17% { stroke-dashoffset: 0.063; }
+    97.65% { stroke-dashoffset: 0.031; }
+    100% { stroke-dashoffset: 0; }
     }
 }

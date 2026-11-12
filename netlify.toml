@@ -1,0 +1,13 @@
+[build]
+  command = "npm run prod"
+  publish = "build_production"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PHP_VERSION = "8.3"
+
+[[headers]]
+  for = "/assets/fonts/*"
+
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

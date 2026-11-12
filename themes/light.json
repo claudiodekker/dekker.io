@@ -1,0 +1,137 @@
+{
+    "name": "dekker-light",
+    "type": "light",
+    "colors": {
+        "editor.background": "#eef1f8",
+        "editor.foreground": "#2a3350",
+        "editorLineNumber.foreground": "#9aa5bd"
+    },
+    "tokenColors": [
+        {
+            "scope": [
+                "comment",
+                "punctuation.definition.comment"
+            ],
+            "settings": {
+                "foreground": "#7b869e",
+                "fontStyle": "italic"
+            }
+        },
+        {
+            "scope": [
+                "string",
+                "string.quoted",
+                "string.unquoted",
+                "punctuation.definition.string"
+            ],
+            "settings": {
+                "foreground": "#1f7a4d"
+            }
+        },
+        {
+            "scope": [
+                "constant.numeric",
+                "constant.language",
+                "constant.character",
+                "constant.other"
+            ],
+            "settings": {
+                "foreground": "#b25a00"
+            }
+        },
+        {
+            "scope": [
+                "keyword",
+                "storage",
+                "storage.type",
+                "storage.modifier",
+                "keyword.control",
+                "keyword.operator.new"
+            ],
+            "settings": {
+                "foreground": "#2c5bd8"
+            }
+        },
+        {
+            "scope": [
+                "entity.name.tag",
+                "support.type.property-name",
+                "meta.object-literal.key",
+                "entity.other.attribute-name"
+            ],
+            "settings": {
+                "foreground": "#2c5bd8"
+            }
+        },
+        {
+            "scope": [
+                "entity.name.function",
+                "support.function",
+                "meta.function-call",
+                "entity.name.command"
+            ],
+            "settings": {
+                "foreground": "#c2255c"
+            }
+        },
+        {
+            "scope": [
+                "entity.name.type",
+                "entity.name.class",
+                "support.class",
+                "support.type"
+            ],
+            "settings": {
+                "foreground": "#6a3fc9"
+            }
+        },
+        {
+            "scope": [
+                "variable",
+                "variable.other",
+                "variable.parameter",
+                "punctuation.definition.variable"
+            ],
+            "settings": {
+                "foreground": "#6a3fc9"
+            }
+        },
+        {
+            "scope": [
+                "keyword.operator",
+                "punctuation",
+                "meta.brace",
+                "punctuation.separator"
+            ],
+            "settings": {
+                "foreground": "#66718a"
+            }
+        },
+        {
+            "scope": [
+                "markup.inserted"
+            ],
+            "settings": {
+                "foreground": "#1f7a4d"
+            }
+        },
+        {
+            "scope": [
+                "markup.deleted"
+            ],
+            "settings": {
+                "foreground": "#c2255c"
+            }
+        },
+        {
+            "scope": [
+                "markup.heading",
+                "markup.bold"
+            ],
+            "settings": {
+                "foreground": "#0c1326",
+                "fontStyle": "bold"
+            }
+        }
+    ]
+}

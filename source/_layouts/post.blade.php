@@ -1,35 +1,37 @@
 @extends('_layouts.master')
-@section('body')
-    <div>
-        <span class="text-xl text-slate-500 font-semibold">{{ $page->getDate()->format('F j, Y') }}</span>
-        <h1 class="block text-5xl font-extrabold text-gray-900 tracking-tight mb-4">{{ $page->title }}</h1>
 
-        <div class="mt-6 mb-16 post">
+@section('styles')
+    @include('_components.prose')
+@endsection
+
+@section('body')
+    <article class="mx-auto max-w-[712px] animate-rise px-6 pt-12 text-base leading-[1.7] md:pt-24 md:text-[17px]">
+        <header>
+            <time class="block font-mono text-[13px] text-dim" datetime="{{ $page->getDate()->format('Y-m-d') }}">{{ $page->getDate()->format('F j, Y') }}</time>
+            <h1 class="mt-2.5 text-[28px] leading-[1.2] font-semibold tracking-[-.025em] text-ink md:text-[34px]">{{ $page->title }}</h1>
+        </header>
+
+        <div class="prose mt-11">
             @yield('content')
         </div>
 
         @php
-            $next = $page->getNext();
-            $previous = $page->getPrevious();
+            $older = $page->getNext();
+            $newer = $page->getPrevious();
         @endphp
-        @if ($next || $previous)
-            <nav class="flex justify-between text-sm md:text-base border-t border-slate-200 pt-3">
-                <div>
-                    @if ($next)
-                        <a href="{{ $next->getUrl() }}" title="Older Post: {{ $next->title }}" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">
-                            &LeftArrow; {{ $next->title }}
-                        </a>
+        @if ($older || $newer)
+            <nav class="mt-16 flex justify-between gap-6 border-t border-line pt-6 font-mono text-[13px] text-dim" aria-label="Posts">
+                <span>
+                    @if ($older)
+                        <a class="hover:text-ink" href="{{ $older->getUrl() }}" title="Older post: {{ $older->title }}">&larr; {{ $older->title }}</a>
                     @endif
-                </div>
-
-                <div>
-                    @if ($previous)
-                        <a href="{{ $previous->getUrl() }}" title="Newer Post: {{ $previous->title }}" class="text-blue-500 font-medium rounded focus:outline-none focus:ring ring-offset-1 ring-blue-300">
-                            {{ $previous->title }} &RightArrow;
-                        </a>
+                </span>
+                <span class="text-right">
+                    @if ($newer)
+                        <a class="hover:text-ink" href="{{ $newer->getUrl() }}" title="Newer post: {{ $newer->title }}">{{ $newer->title }} &rarr;</a>
                     @endif
-                </div>
+                </span>
             </nav>
         @endif
-    </div>
+    </article>
 @endsection
