@@ -13,5 +13,10 @@
             "App\\": "app/",
             "App\\Listeners\\": "listeners/"
         }
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.36"
+        }
     }
 }
