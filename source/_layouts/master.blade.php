@@ -32,9 +32,6 @@
         @if ($page->image)<meta name="twitter:image" content="{{ $page->domain . $page->image }}">@endif
         <style>{!! $page->styles() !!}</style>
         @yield('styles')
-        @if ($page->production)
-            <script src="https://cdn.usefathom.com/script.js" data-site="CULPJASS" defer></script>
-        @endif
     </head>
     <body class="font-sans antialiased">
         <div class="backdrop relative min-h-dvh overflow-hidden pb-24 text-soft">
