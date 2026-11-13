@@ -16,6 +16,6 @@
   for = "/*"
 
   [headers.values]
-    Content-Security-Policy = "default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'"
+    Content-Security-Policy = "default-src 'none'; connect-src 'self'; script-src 'self'; style-src 'unsafe-inline'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'"
     Cross-Origin-Opener-Policy = "same-origin"
     X-Frame-Options = "DENY"
