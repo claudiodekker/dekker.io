@@ -6,7 +6,7 @@
     .prose h2 { font-size: 22px; }
     .prose h3 { font-size: 19px; }
     .prose h4 { font-size: 17px; }
-    .prose a { color: var(--color-accent); }
+    .prose a { color: var(--color-accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); }
     .prose a:hover { color: var(--color-ink); }
     .prose strong { font-weight: 600; color: var(--color-ink); }
     .prose ul, .prose ol { padding-left: 1.3em; }
