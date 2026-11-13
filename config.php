@@ -11,7 +11,6 @@ use Torchlight\Engine\CommonMark\Extension as TorchlightExtension;
 use Torchlight\Engine\Theme\Theme;
 
 return [
-    'production' => false,
     'domain' => 'http://dekker.test',
     'siteName' => 'Claudio Dekker',
     'siteAuthor' => 'Claudio Dekker',
