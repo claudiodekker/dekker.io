@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--
+    The live homepage (source/_layouts/master.blade.php and home.blade.php) as one static page, with the
+    signature drawn by the pacing script below instead of the fixed keyframes in app.css. R replays it.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signature</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --night: #070c1a; --ink: #f1f5fd; --soft: #a9b6d0; --dim: #7686a4; --accent: #8fb4ff; --line: rgb(143 180 255 / .12);
+    --glow-cool: rgb(74 113 255 / .2); --glow-warm: rgb(255 170 90 / .07); --grid: rgb(143 180 255 / .05); --selection: rgb(143 180 255 / .28);
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --night: #f5f7fc; --ink: #0c1326; --soft: #434d66; --dim: #66718a; --accent: #2c5bd8; --line: rgb(24 44 96 / .13);
+        --glow-cool: rgb(90 130 255 / .17); --glow-warm: rgb(255 160 80 / .13); --grid: rgb(40 70 150 / .07); --selection: rgb(60 110 255 / .2);
+    }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--night); color-scheme: dark light; }
+body { margin: 0; font-family: 'Geist', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; transition: color .2s; }
+::selection { background: var(--selection); color: var(--ink); }
+.mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+
+.backdrop { position: relative; min-height: 100dvh; overflow: hidden; padding-bottom: 96px; color: var(--soft); }
+.backdrop::before, .backdrop::after { content: ''; position: absolute; inset: 0 0 auto; height: max(100vh, 1000px); pointer-events: none; }
+.backdrop::before {
+    background:
+        radial-gradient(900px 520px at 78% 8%, var(--glow-cool), transparent 65%),
+        radial-gradient(700px 500px at 5% 75%, var(--glow-warm), transparent 65%);
+}
+.backdrop::after {
+    opacity: .5;
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 70% 60% at 60% 30%, #000, transparent);
+    transform: perspective(900px) rotateX(48deg) scale(1.6);
+    transform-origin: 50% 0;
+}
+.backdrop > * { position: relative; z-index: 1; }
+
+nav { display: flex; align-items: center; justify-content: space-between; max-width: 1080px; margin: 0 auto; padding: 28px 24px; font-size: 13px; letter-spacing: .02em; color: var(--dim); }
+nav .home { color: var(--ink); }
+nav ul { display: flex; gap: 16px; }
+nav ul a:hover { color: var(--ink); }
+
+.letter { max-width: 614px; margin: 0 auto; padding: 48px 24px 0; font-size: 17px; line-height: 1.6; letter-spacing: -.005em; }
+.letter p { animation: rise 1.5s cubic-bezier(.16, 1, .3, 1) both; text-wrap: pretty; }
+.letter p + p { margin-top: 1.45em; }
+.letter p:first-child { color: var(--ink); }
+.letter p:nth-child(2) { animation-delay: .14s; }
+.letter p:nth-child(3) { animation-delay: .28s; }
+.letter p:nth-child(n + 4) { animation-delay: .42s; }
+.letter p a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); }
+.letter p a:hover { color: var(--ink); }
+
+.signature { display: block; width: 165px; height: auto; margin: 26px 0 0 -1px; color: var(--ink); overflow: visible; transform: rotate(-2deg) skewX(7deg); transform-origin: left bottom; }
+.signature path { fill: none; stroke: currentColor; stroke-width: 1.33; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+
+.signed { margin-top: 44px; font-size: 13px; line-height: 1.7; color: var(--dim); animation: rise 1.5s cubic-bezier(.16, 1, .3, 1) var(--signed, 1.69s) both; }
+.pgp {
+    display: flex; justify-content: space-between; column-gap: 16px; margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
+    font-size: min(12px, calc((100vw - 64px) / 31.5)); line-height: 1.7; white-space: nowrap; color: var(--dim);
+    animation: rise 1.5s cubic-bezier(.16, 1, .3, 1) var(--signed, 1.69s) both;
+}
+.pgp a:hover { color: var(--soft); }
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(26px); }
+}
+
+@media (min-width: 768px) {
+    nav ul { gap: 28px; }
+    .letter { padding-top: 96px; font-size: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="backdrop">
+    <nav class="mono" aria-label="Main">
+        <a class="home" href="#">Claudio Dekker</a>
+        <ul>
+            <li><a href="https://github.com/claudiodekker">GitHub</a></li>
+            <li><a href="https://x.com/claudiodekker">X</a></li>
+        </ul>
+    </nav>
+    <main>
+        <article class="letter">
+            <p>Hi! I'm Claudio, a software developer from Amsterdam. I build for the web, and I have a soft spot for the tools other developers build with.</p>
+            <p>I've been writing software since I was eight. That's when I discovered that building things is awesome, and I pretty much haven't put the keyboard down since.</p>
+            <p>Most people probably know me from my time as a core maintainer of <a href="https://inertiajs.com">Inertia.js</a> and my work on <a href="https://forge.laravel.com">Forge</a> at <a href="https://laravel.com">Laravel</a>. These days I'm building MateriaalMeester with my dad, and in January I'm joining <a href="https://fixico.com">Fixico</a>.</p>
+            <p>Open source is a big part of what I do. Lately most of that work goes into agentic AI tooling for Laravel, like <a href="https://github.com/claudiodekker/laravel-guardrails">Guardrails</a> and <a href="https://github.com/claudiodekker/firewatch">Firewatch</a>.</p>
+            <p>Away from the screen you'll find me in a video game, or offline with family and friends.</p>
+            <svg class="signature" viewBox="0 14 176 80" role="img" aria-label="Claudio">
+                <path pathLength="1" d="M65.18 37.42C65.43 36.88 66.47 35.32 66.71 34.2C66.95 33.07 66.99 31.68 66.61 30.68C66.23 29.69 65.39 28.73 64.45 28.22C63.51 27.7 62.15 27.62 60.97 27.6C59.8 27.58 58.57 27.84 57.39 28.1C56.21 28.36 55.05 28.74 53.91 29.15C52.78 29.57 51.67 30.07 50.58 30.6C49.5 31.13 48.43 31.73 47.39 32.35C46.35 32.97 45.34 33.64 44.34 34.33C43.34 35.01 42.35 35.73 41.38 36.46C40.41 37.18 39.46 37.93 38.52 38.7C37.58 39.47 36.65 40.28 35.75 41.08C34.85 41.89 33.97 42.71 33.1 43.55C32.23 44.39 31.36 45.24 30.51 46.11C29.67 46.99 28.84 47.88 28.03 48.79C27.23 49.7 26.44 50.62 25.68 51.56C24.91 52.5 24.16 53.46 23.44 54.44C22.72 55.41 22.01 56.4 21.35 57.41C20.7 58.43 20.09 59.48 19.51 60.55C18.92 61.61 18.35 62.7 17.86 63.81C17.38 64.92 16.94 66.05 16.61 67.21C16.29 68.37 16.01 69.57 15.91 70.77C15.81 71.96 15.76 73.22 16.01 74.36C16.25 75.51 16.72 76.69 17.37 77.66C18.02 78.63 18.93 79.52 19.91 80.18C20.88 80.84 22.05 81.27 23.2 81.62C24.34 81.96 25.57 82.13 26.77 82.24C27.97 82.34 29.19 82.35 30.39 82.26C31.59 82.18 32.8 81.95 33.99 81.73C35.18 81.5 36.37 81.23 37.54 80.9C38.7 80.57 39.84 80.15 40.99 79.75C42.13 79.34 43.27 78.91 44.4 78.46C45.53 78.01 46.65 77.55 47.75 77.05C48.86 76.55 49.95 76.01 51.03 75.47C52.12 74.92 53.29 74.36 54.25 73.78C55.22 73.2 56.04 72.48 56.81 71.98C57.58 71.48 58.19 71.2 58.86 70.79C59.54 70.38 60.23 69.99 60.86 69.51C61.49 69.04 62.03 68.43 62.65 67.96C63.28 67.48 63.96 67.1 64.61 66.65C65.26 66.21 65.93 65.78 66.57 65.29C67.21 64.8 67.84 64.27 68.44 63.71C69.03 63.15 69.57 62.51 70.15 61.92C70.73 61.33 71.33 60.77 71.91 60.17C72.48 59.58 73.04 58.96 73.61 58.34C74.18 57.73 74.75 57.13 75.3 56.51C75.86 55.89 76.4 55.25 76.94 54.62C77.49 53.98 78.04 53.35 78.58 52.7C79.11 52.06 79.65 51.41 80.17 50.75C80.69 50.09 81.2 49.42 81.7 48.73C82.19 48.05 82.69 47.35 83.14 46.63C83.59 45.9 84.09 45.15 84.38 44.38C84.68 43.6 85.07 42.53 84.9 41.97C84.73 41.42 83.98 41.05 83.38 41.06C82.78 41.06 81.95 41.59 81.29 42.02C80.64 42.44 80.04 43.05 79.44 43.6C78.84 44.16 78.25 44.75 77.68 45.36C77.12 45.97 76.57 46.62 76.04 47.26C75.5 47.9 74.97 48.55 74.45 49.21C73.93 49.87 73.4 50.54 72.89 51.21C72.38 51.88 71.88 52.55 71.38 53.24C70.89 53.93 70.43 54.65 69.95 55.36C69.48 56.06 68.99 56.76 68.53 57.48C68.06 58.2 67.61 58.93 67.17 59.66C66.72 60.39 66.27 61.13 65.84 61.87C65.41 62.62 64.97 63.36 64.59 64.13C64.22 64.9 63.99 65.77 63.59 66.51C63.2 67.24 62.6 67.8 62.23 68.53C61.86 69.27 61.61 70.1 61.35 70.93C61.09 71.75 60.82 72.72 60.66 73.47C60.49 74.23 60.36 74.7 60.36 75.44C60.35 76.18 60.42 77.37 60.63 77.92C60.84 78.47 61.23 78.58 61.63 78.73C62.03 78.88 62.45 78.92 63.02 78.82C63.58 78.71 64.3 78.43 65.02 78.1C65.74 77.77 66.53 77.32 67.33 76.84C68.12 76.36 68.87 75.79 69.79 75.22C70.72 74.65 71.84 74.17 72.87 73.42C73.9 72.67 74.92 71.66 75.95 70.72C76.98 69.78 78 68.61 79.03 67.75C80.06 66.89 81.21 66.06 82.11 65.59C83.01 65.12 83.81 64.89 84.42 64.96C85.04 65.04 85.78 65.43 85.81 66.04C85.83 66.66 85.19 67.72 84.58 68.65C83.96 69.58 82.91 70.67 82.11 71.62C81.32 72.56 80.42 73.52 79.8 74.32C79.19 75.11 78.99 75.79 78.42 76.39C77.84 76.99 77.07 77.5 76.34 77.92C75.6 78.34 74.71 78.83 74.03 78.91C73.35 78.98 72.65 78.74 72.25 78.37C71.86 77.99 71.59 77.33 71.64 76.66C71.69 75.98 71.84 75.31 72.56 74.32C73.28 73.33 74.87 71.81 75.95 70.72C77.03 69.62 78 68.61 79.03 67.75C80.06 66.89 81.21 66.06 82.11 65.59C83.01 65.12 83.81 64.89 84.42 64.96C85.04 65.04 85.78 65.43 85.81 66.04C85.83 66.66 85.19 67.72 84.58 68.65C83.96 69.58 82.91 70.67 82.11 71.62C81.32 72.56 80.4 73.46 79.8 74.32C79.2 75.17 78.75 76.09 78.49 76.75C78.24 77.41 78.07 77.86 78.26 78.28C78.45 78.7 79.07 79.19 79.65 79.27C80.22 79.34 80.93 79.11 81.73 78.73C82.52 78.36 83.46 77.69 84.42 77.02C85.38 76.34 86.47 75.46 87.5 74.68C88.53 73.9 89.68 73.15 90.58 72.34C91.48 71.53 92.1 70.69 92.89 69.82C93.69 68.95 95.36 67.12 95.36 67.12C95.36 67.12 93.66 68.92 92.89 69.82C92.12 70.72 91.31 71.62 90.74 72.52C90.16 73.42 89.63 74.44 89.43 75.22C89.22 76 89.25 76.78 89.5 77.2C89.76 77.62 90.27 77.94 90.97 77.74C91.66 77.55 92.76 76.69 93.66 76.03C94.56 75.37 95.56 74.48 96.36 73.78C97.15 73.08 97.79 72.46 98.44 71.8C99.08 71.14 99.67 70.4 100.21 69.82C100.75 69.23 101.67 68.29 101.67 68.29C101.67 68.29 100.75 69.2 100.21 69.82C99.67 70.43 98.94 71.12 98.44 71.98C97.93 72.84 97.43 74.05 97.2 74.95C96.97 75.85 96.87 76.79 97.05 77.38C97.23 77.97 97.63 78.49 98.28 78.46C98.94 78.43 100.08 77.77 100.98 77.2C101.87 76.63 102.6 75.92 103.67 75.04C104.74 74.16 106.55 72.83 107.4 71.94C108.26 71.05 108.25 70.38 108.8 69.7C109.35 69.02 110.04 68.36 110.71 67.87C111.38 67.37 111.97 66.9 112.85 66.72C113.73 66.53 114.99 66.56 115.99 66.76C116.99 66.96 118.84 67.93 118.84 67.93C118.84 67.93 116.99 66.96 115.99 66.76C114.99 66.56 113.73 66.53 112.85 66.72C111.97 66.9 111.38 67.37 110.71 67.87C110.04 68.36 109.35 69.02 108.8 69.7C108.25 70.38 107.75 71.14 107.4 71.94C107.05 72.73 106.77 73.68 106.69 74.47C106.62 75.26 106.69 76.04 106.95 76.66C107.21 77.29 107.69 77.89 108.27 78.22C108.84 78.55 109.63 78.69 110.4 78.62C111.18 78.55 112.13 78.22 112.92 77.79C113.71 77.37 114.5 76.71 115.14 76.07C115.78 75.43 116.33 74.65 116.75 73.94C117.17 73.24 117.31 72.82 117.66 71.82C118.01 70.82 118.31 69.31 118.84 67.93C119.37 66.55 119.78 65.67 120.84 63.52C121.91 61.38 123.78 57.82 125.23 55.06C126.68 52.3 128.23 49.48 129.54 46.96C130.85 44.44 133.08 39.94 133.08 39.94C133.08 39.94 130.85 44.44 129.54 46.96C128.23 49.48 126.68 52.3 125.23 55.06C123.78 57.82 121.91 61.38 120.84 63.52C119.78 65.67 119.37 66.55 118.84 67.93C118.31 69.31 118.03 70.78 117.66 71.82C117.29 72.86 116.92 73.27 116.63 74.15C116.34 75.03 115.9 76.32 115.91 77.11C115.92 77.9 116.23 78.72 116.68 78.91C117.13 79.1 117.88 78.81 118.61 78.28C119.34 77.75 120.23 76.69 121.07 75.76C121.92 74.83 122.82 73.69 123.69 72.7C124.56 71.71 125.54 70.64 126.31 69.82C127.08 68.99 127.68 68.41 128.31 67.75C128.94 67.09 130.08 65.86 130.08 65.86C130.08 65.86 128.91 67.03 128.31 67.75C127.71 68.47 127.03 69.24 126.46 70.18C125.9 71.12 125.33 72.37 124.92 73.42C124.51 74.47 124.08 75.61 124 76.48C123.92 77.35 124.08 78.16 124.46 78.64C124.85 79.12 125.62 79.39 126.31 79.36C127 79.33 127.87 78.85 128.62 78.46C129.36 78.07 130.11 77.52 130.77 77.02C131.44 76.52 132.06 75.85 132.62 75.49C133.18 75.13 133.75 75.55 134.13 74.87C134.51 74.2 134.51 72.59 134.9 71.45C135.29 70.31 135.83 68.99 136.45 68.03C137.08 67.08 138.01 66.03 138.65 65.71C139.3 65.39 140.34 66.12 140.34 66.12C140.34 66.12 139.3 65.39 138.65 65.71C138.01 66.03 137.08 67.08 136.45 68.03C135.83 68.99 135.29 70.31 134.9 71.45C134.51 72.59 134.29 73.91 134.13 74.87C133.96 75.84 133.8 76.63 133.93 77.27C134.06 77.91 134.48 78.43 134.9 78.7C135.32 78.98 135.85 79.09 136.45 78.91C137.06 78.73 137.9 78.21 138.52 77.61C139.15 77.01 139.72 76.17 140.21 75.28C140.69 74.4 141.13 73.28 141.43 72.28C141.74 71.27 142.01 70.11 142.02 69.27C142.03 68.42 141.78 67.74 141.5 67.21C141.22 66.69 140.72 66.36 140.34 66.12C139.95 65.88 139.45 65.66 139.17 65.78C138.89 65.89 138.59 66.44 138.65 66.8C138.72 67.17 139.04 67.74 139.56 67.97C140.08 68.19 140.94 68.3 141.76 68.17C142.58 68.05 143.19 67.66 144.47 67.21C145.76 66.77 147.56 66.27 149.49 65.5C151.41 64.73 154.94 63.1 156.03 62.62"/>
+                <path pathLength="1" d="M132.47 60.82C132.55 60.69 132.85 60.15 132.93 60.01"/>
+            </svg>
+            <div class="signed mono">Amsterdam, NL<br>November 2026</div>
+            <div class="pgp mono">
+                <span>PGP</span>
+                <a href="https://keybase.io/claudiodekker/pgp_keys.asc?fingerprint=08fdb44b6d6320215d1ee8c13025ffe233ccc24b">08FD B44B 6D63 2021 5D1E E8C1 3025 FFE2 33CC C24B</a>
+            </div>
+        </article>
+    </main>
+</div>
+<script>
+const strokes = [...document.querySelectorAll('.signature path')]
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+const penSpeed = 300
+const penStart = 250
+const penLift = 150
+const sampleEvery = 1
+const retraceGap = 8
+const retraceReach = 0.45
+const retraceHurry = 3
+
+// Where the pen changes tempo, in writing order: a brisk capital, a quick loop for the l, steady
+// through the a, quick for the repeated strokes of the u, a fast run up and down the d, and a flick to finish.
+const tempo = [
+    { x: 65.18, y: 37.42, pace: 1.3 },
+    { x: 58.24, y: 71.8, pace: 1.45 },
+    { x: 67.33, y: 76.84, pace: 1.15 },
+    { x: 90.58, y: 72.34, pace: 1.5 },
+    { x: 103.67, y: 75.04, pace: 1.2 },
+    { x: 120.84, y: 63.52, pace: 1.7 },
+    { x: 118.61, y: 78.28, pace: 1.45 },
+    { x: 132.62, y: 75.49, pace: 1.3 },
+    { x: 140.48, y: 66.76, pace: 1.9 },
+]
+
+function distance(from, to) {
+    return Math.hypot(to.x - from.x, to.y - from.y)
+}
+
+function average(values, index, reach) {
+    const near = values.slice(Math.max(index - reach, 0), index + reach + 1)
+
+    return near.reduce((sum, value) => sum + value, 0) / near.length
+}
+
+// A hand slows down in tight curves and speeds up on straights (speed ~ curvature^-1/3),
+// and hurries back over a line that is already there, since that shows nothing new. The pen eases into
+// each stroke as it sets down and out of it as it lifts.
+function pace(stroke) {
+    const length = stroke.getTotalLength()
+    const count = Math.max(Math.ceil(length / sampleEvery), 2)
+    const points = Array.from({ length: count + 1 }, (_, index) => stroke.getPointAtLength((index / count) * length))
+
+    const paces = []
+    let zone = 0
+
+    const speeds = points.map((point, index) => {
+        if (tempo[zone + 1] && distance(point, tempo[zone + 1]) < 1.6) zone++
+
+        paces.push(tempo[zone].pace)
+
+        const before = points[Math.max(index - 1, 0)]
+        const after = points[Math.min(index + 1, count)]
+        const turn = Math.abs(Math.atan2(after.y - point.y, after.x - point.x) - Math.atan2(point.y - before.y, point.x - before.x))
+        const curvature = Math.min(turn, 2 * Math.PI - turn) / Math.max(distance(before, after) / 2, 0.01)
+        const retracing = points.slice(0, Math.max(index - retraceGap, 0)).some((earlier) => distance(earlier, point) < retraceReach)
+
+        return Math.pow(curvature + 0.015, -1 / 3) * (retracing ? retraceHurry : 1)
+    })
+
+    const steady = speeds.map((_, index) => average(speeds, index, 4))
+    const smoothed = steady.map((speed, index) => speed * average(paces, index, 6))
+
+    smoothed[0] *= 0.35
+    smoothed[1] *= 0.6
+    smoothed[count - 1] *= 0.6
+    smoothed[count] *= 0.4
+
+    let elapsed = 0
+    const times = smoothed.map((speed, index) => (elapsed += index ? 1 / speed : 0))
+    const unhurried = steady.slice(1).reduce((sum, speed) => sum + 1 / speed, 0)
+
+    // A stretch at pace 1 moves at the plain pen speed; quicker stretches only ever shorten the whole.
+    return { times: times.map((time) => time / elapsed), duration: (length / penSpeed) * (elapsed / unhurried) * 1000 }
+}
+
+function write() {
+    let delay = penStart
+
+    const shown = strokes.filter((stroke) => stroke.getClientRects().length)
+
+    shown.forEach((stroke, index) => {
+        const paced = pace(stroke)
+        const times = paced.times
+        const duration = Math.max(paced.duration, 90)
+
+        const keyframes = times.map((offset, index) => ({
+            offset,
+            opacity: index === 0 ? 0 : 1,
+            strokeDashoffset: 1 - index / (times.length - 1),
+        }))
+
+        stroke.getAnimations().forEach((animation) => animation.cancel())
+        stroke.animate(keyframes, { delay, duration, fill: 'both' })
+
+        delay += duration + penLift
+    })
+
+    return delay - penLift
+}
+
+addEventListener('keydown', (event) => {
+    if (event.key === 'r') write()
+})
+
+if (! reducedMotion.matches) document.documentElement.style.setProperty('--signed', `${write() - 300}ms`)
+</script>
+</body>
+</html>
